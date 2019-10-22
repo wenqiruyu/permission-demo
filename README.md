@@ -67,3 +67,38 @@ serverurl=unix:///var/run/supervisor.sock ; use a unix:// URL for a unix socket
 files = /etc/supervisor/conf.d/*.conf
 server.conf
 [program:server] command=python /opt/archive_server/server.py autorstart=true redirect_stderr=true stdout_logfile=/mnt/log/supervisord_server.log directory=/tmp user=root priority=1
+
+
+1、添加好配置文件后
+supervisord -c /etc/supervisord.conf
+
+2、更新新的配置到supervisord
+supervisorctl update 
+
+3、重新启动配置中的所有程序
+supervisorctl reload
+
+4、查看进程状态
+supervisorctl status 
+
+5、查看正在守候的进程
+supervisorctl 
+
+6、启动某个进程(program_name=你配置中写的程序名称)
+supervisorctl start program_name 
+
+7、停止某一进程 (program_name=你配置中写的程序名称)
+pervisorctl stop program_name 
+
+8、重启某一进程 (program_name=你配置中写的程序名称)
+supervisorctl restart program_name 
+
+9、启动全部进程
+supervisorctl start all 
+
+9、停止全部进程
+supervisorctl stop all 
+
+注意：显示用stop停止掉的进程，用reload或者update都不会自动重启。
+
+
